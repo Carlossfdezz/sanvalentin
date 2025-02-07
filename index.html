@@ -3,158 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi San Valentín?</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <title>Te Amo Candela</title>
     <style>
         body {
             text-align: center;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            color: white;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #fff0f6;
         }
-        h1, h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 0.15em solid #fff;
-            animation: typing 3s steps(30) 1s 1 normal both;
+        h1 {
+            color: #ff4081;
         }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        .buttons {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        button {
+        .mensaje {
             font-size: 1.5em;
-            padding: 12px 25px;
-            margin: 5px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 80%;
-            max-width: 250px;
+            margin: 10px;
         }
-        .yes {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .yes:hover {
-            background-color: #45a049;
-        }
-        .no {
-            background-color: #ff4d4d;
-            color: white;
-            position: relative;
-        }
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .heart {
-            position: absolute;
-            bottom: 0;
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
-            animation: float 5s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
-        }
-        #musicContainer {
-            display: none;
-            margin-top: 20px;
-        }
-        audio {
-            width: 100%;
-            max-width: 300px;
-        }
-
-        /* Media Queries para mejorar la visualización en móviles */
-        @media (max-width: 600px) {
-            h1, h2 {
-                font-size: 1.8em;
-            }
-            button {
-                font-size: 1.2em;
-                padding: 10px 20px;
-            }
+        .corazon {
+            color: red;
         }
     </style>
 </head>
 <body>
-
-    <h1 id="question">¿Candela, quieres ser mi San Valentín? ❤</h1>
-    <h2 id="message"></h2>
-
-    <div class="buttons">
-        <button class="yes" onclick="showLove()">Sí 💖</button>
-        <button class="no" onmouseover="moveButton()">No 😢</button>
-    </div>
-
-    <div class="hearts"></div>
-
-    <div id="musicContainer">
-        <h2>Esta canción es para ti 🎶</h2>
-        <audio controls>
-            <source src="Allofme.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-    </div>
+    <h1>Te Amo Candela ❤️</h1>
+    <div id="mensajes"></div>
 
     <script>
-        function moveButton() {
-            let button = document.querySelector('.no');
-            let x = Math.random() * (window.innerWidth - 100);
-            let y = Math.random() * (window.innerHeight - 50);
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
-        }
+        const idiomas = {
+            "Español": "Te amo Candela",
+            "Inglés": "I love you Candela",
+            "Francés": "Je t'aime Candela",
+            "Alemán": "Ich liebe dich Candela",
+            "Italiano": "Ti amo Candela",
+            "Portugués": "Eu te amo Candela",
+            "Japonés": "愛してる カンデラ (Aishiteru Candela)",
+            "Chino": "我爱你 Candela (Wǒ ài nǐ Candela)",
+            "Ruso": "Я люблю тебя, Кандела (Ya lyublyu tebya, Candela)",
+            "Árabe": "أنا أحبك كانديلا (Ana uhibbuki Candela)",
+            "Hindi": "मैं तुमसे प्यार करता हूँ कैंडेला (Main tumse pyaar karta hoon Candela)",
+            "Coreano": "사랑해 캔델라 (Saranghae Candela)",
+            "Turco": "Seni seviyorum Candela",
+            "Holandés": "Ik hou van jou Candela",
+            "Griego": "Σ' αγαπώ Candela (S' agapó Candela)",
+            "Sueco": "Jag älskar dig Candela",
+            "Finlandés": "Rakastan sinua Candela",
+            "Polaco": "Kocham cię Candela",
+            "Hebreo": "אני אוהב אותך קנדלה (Ani ohev otach Candela)",
+            "Vietnamita": "Anh yêu em Candela",
+            "Húngaro": "Szeretlek Candela",
+            "Checo": "Miluji tě Candela",
+            "Tagalo (Filipinas)": "Mahal kita Candela",
+            "Afrikáans": "Ek is lief vir jou Candela",
+            "Bengalí": "আমি তোমাকে ভালোবাসি ক্যান্ডেলা (Ami tomake bhalobashi Candela)",
+            "Euskera": "Maite zaitut Candela",
+            "Catalán": "T'estimo Candela",
+            "Gallego": "Quérote Candela",
+            "Esperanto": "Mi amas vin Candela"
+        };
 
-        function showLove() {
-            document.getElementById("question").innerText = "¡Sabía que dirías que sí! 😍💖";
-            document.getElementById("message").innerText = "¡Te amo millones! 💕";
-            document.querySelector(".buttons").remove();
-            document.getElementById("musicContainer").style.display = "block";
-            createHearts();
-        }
-
-        function createHearts() {
-            const heartsContainer = document.querySelector('.hearts');
-            for (let i = 0; i < 30; i++) {
-                let heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.style.left = `${Math.random() * 100}vw`;
-                heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
-                heart.style.width = `${Math.random() * 20 + 10}px`;
-                heart.style.height = heart.style.width;
-                heart.style.backgroundColor = ['#ff4d4d', '#ff7eb3', '#fff'][Math.floor(Math.random() * 3)];
-                heartsContainer.appendChild(heart);
-            }
+        const contenedor = document.getElementById("mensajes");
+        
+        for (let idioma in idiomas) {
+            let mensaje = document.createElement("p");
+            mensaje.classList.add("mensaje");
+            mensaje.innerHTML = `${idiomas[idioma]} <span class="corazon">❤️</span>`;
+            contenedor.appendChild(mensaje);
         }
     </script>
-
 </body>
 </html>
